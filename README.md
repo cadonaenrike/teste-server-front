@@ -1,4 +1,7 @@
 # Frontend do Desafio React Jr
+![Screenshot_6](https://github.com/cadonaenrike/teste-server-front/assets/95323804/57d6093b-0dca-489d-9ef5-10e13d33240e)
+
+link do PROJETO:https://teste-server-front.vercel.app/
 
 Este repositório contém a parte frontend do Desafio React Jr, uma aplicação desenvolvida com ReactJS e TailwindCSS. O objetivo deste projeto é consumir a API do backend, proporcionando uma interface para visualizar, adicionar, editar, e excluir produtos, além de visualizar detalhes específicos de cada um.
 
