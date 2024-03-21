@@ -14,18 +14,23 @@ const EditProductModal: React.FC<EditProductModalProps> = ({
   onProductUpdated,
 }) => {
   const [descricao, setDescricao] = useState(product.descricao);
-  const [preco, setPreco] = useState(product.preco.toString());
+  const [preco, setPreco] = useState<number>(product.preco);
 
   const handleUpdate = async () => {
+    if (!descricao || preco <= 0) {
+      alert("Por favor, preencha todos os campos ou verifique os valores.");
+      return;
+    }
     try {
       await ProductService.updateProduct(product.codigo, {
         descricao,
-        preco: parseFloat(preco),
+        preco: preco,
       });
       onClose();
       onProductUpdated();
     } catch (error) {
       console.error("Erro ao atualizar o produto", error);
+      alert("Ocorreu um erro ao tentar editar o produto.");
     }
   };
 
@@ -67,8 +72,8 @@ const EditProductModal: React.FC<EditProductModalProps> = ({
                   <input
                     type="number"
                     id="preco"
-                    value={preco}
-                    onChange={(e) => setPreco(e.target.value)}
+                    value={preco.toString()}
+                    onChange={(e) => setPreco(parseFloat(e.target.value))}
                     className="block w-full mt-1 p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-base"
                   />
                 </div>

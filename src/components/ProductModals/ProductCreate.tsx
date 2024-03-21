@@ -11,18 +11,18 @@ const CreateProductModal: React.FC<CreateProductModalProps> = ({
   onProductCreated,
 }) => {
   const [descricao, setDescricao] = useState("");
-  const [preco, setPreco] = useState("");
+  const [preco, setPreco] = useState<number>(0);
 
   const handleCreate = async () => {
-    if (!descricao || preco === "") {
-      alert("Por favor, preencha todos os campos.");
+    if (!descricao || preco <= 0) {
+      alert("Por favor, preencha todos os campos ou verifique os valores.");
       return;
     }
 
     try {
       await ProductService.createProduct({
         descricao,
-        preco: parseFloat(preco),
+        preco: preco,
       });
       onProductCreated();
       onClose();
@@ -57,8 +57,8 @@ const CreateProductModal: React.FC<CreateProductModalProps> = ({
             <input
               type="number"
               placeholder="Preço"
-              value={preco}
-              onChange={(e) => setPreco(e.target.value)}
+              value={preco.toString()}
+              onChange={(e) => setPreco(parseFloat(e.target.value))}
               className="mt-4 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-base"
               step="0.01"
             />
